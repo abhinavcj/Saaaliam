@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Picker</title>
+  <style>
+    #image-display {
+      max-width: 100%;
+      height: auto;
+      display: none; /* Hide the image initially */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Select an Image to Display</h1>
+  
+  <!-- Image Picker (File Input) -->
+  <input type="file" id="image-picker" accept="image/*" />
+  
+  <!-- Image Display Area -->
+  <img id="image-display" src="" alt="Selected Image" />
+
+  <script>
+    // Get the file input element and image display element
+    const imagePicker = document.getElementById('image-picker');
+    const imageDisplay = document.getElementById('image-display');
+    
+    // Event listener for when the user selects an image
+    imagePicker.addEventListener('change', function(event) {
+      const file = event.target.files[0];  // Get the selected file
+      
+      if (file) {
+        const reader = new FileReader();  // Create a file reader
+        
+        reader.onload = function(e) {
+          // Set the src of the image to the selected file
+          imageDisplay.src = e.target.result;
+          imageDisplay.style.display = 'block';  // Show the image
+        };
+        
+        reader.readAsDataURL(file);  // Read the file as a data URL
+      }
+    });
+  </script>
+
+</body>
+</html>
